@@ -26,8 +26,8 @@ function sleep(ms) {
 }
 
 async function removeBlacklists(podObj) {
-
-  if (podObj.childOf === "8upJILbuOURWTDkNtTZRoqmF32J2zjsw4PGj3SNWZ40") {
+  // temporal hotfix
+  if (["8upJILbuOURWTDkNtTZRoqmF32J2zjsw4PGj3SNWZ40", "IsnhHYs1JXLBBIwFgz8ztnBvcR6dpFVkJM_YRHIXJfE"].includes(podObj.childOf)) {
     return podObj;
   }
   const episodes = podObj["episodes"];
@@ -77,11 +77,7 @@ export async function getPodcasts() {
   const decodedPermacast = JSON.parse(base64url.decode(encodedPermacast));
 
   for (let factory of decodedPermacast.res) {
-    // console.log("FACTORYYYYYYYYYYYYYY\n\n")
-    // console.log(factory)
-    // console.log("\n\n\n")
-    // const v2Possibility = V2_V3_ARRAY.findIndex((f) => f.old === factory.id);
-    // if(v2Possibility !== -1)
+
     const podcasts = factory.podcasts;
 
     if (podcasts.length === 0) {
