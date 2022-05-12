@@ -27,7 +27,7 @@ function sleep(ms) {
 
 async function removeBlacklists(podObj) {
   // temporal hotfix
-  if (["8upJILbuOURWTDkNtTZRoqmF32J2zjsw4PGj3SNWZ40", "IsnhHYs1JXLBBIwFgz8ztnBvcR6dpFVkJM_YRHIXJfE"].includes(podObj.childOf)) {
+  if (["8upJILbuOURWTDkNtTZRoqmF32J2zjsw4PGj3SNWZ40", "IsnhHYs1JXLBBIwFgz8ztnBvcR6dpFVkJM_YRHIXJfE", "K3vHfTvvl5Ca4qHKAKzzfmxMvkB5oNSibkzqo_h5_HI"].includes(podObj.childOf)) {
     return podObj;
   }
   const episodes = podObj["episodes"];
