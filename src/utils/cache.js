@@ -14,7 +14,7 @@ async function cache() {
   }
 
   if (base64urlState !== base64Cache.get("state")) {
-    console.log(`NEW STATE CACHED: ${base64urlState}`)
+    console.log(`NEW STATE CACHED: ${base64urlState}`);
     base64Cache.set("state", base64urlState);
   } else {
     console.log(`\n\n\n\n\n STATE ALREADY CACHED: ${base64Cache.get("state")}`);
@@ -26,20 +26,27 @@ function sleep(ms) {
 }
 
 async function removeBlacklists(podObj) {
-  // temporal hotfix
-  if (["8upJILbuOURWTDkNtTZRoqmF32J2zjsw4PGj3SNWZ40", "IsnhHYs1JXLBBIwFgz8ztnBvcR6dpFVkJM_YRHIXJfE", "K3vHfTvvl5Ca4qHKAKzzfmxMvkB5oNSibkzqo_h5_HI"].includes(podObj.childOf)) {
+  if (
+    [
+      "8upJILbuOURWTDkNtTZRoqmF32J2zjsw4PGj3SNWZ40",
+      "IsnhHYs1JXLBBIwFgz8ztnBvcR6dpFVkJM_YRHIXJfE",
+      "K3vHfTvvl5Ca4qHKAKzzfmxMvkB5oNSibkzqo_h5_HI",
+      "bVdFsVa1AxCWgt6i_0zMS5OxmVJmzsANF-izwCQcnh4",
+    ].includes(podObj.childOf)
+  ) {
     return podObj;
   }
   const episodes = podObj["episodes"];
-//   podObj["original_episodes_array"] = episodes;
+  //   podObj["original_episodes_array"] = episodes;
   let BLACKLISTED_EPISODES = await getStateOf(MASKING_CONTRACT);
-  
+
   if (!BLACKLISTED_EPISODES) {
     BLACKLISTED_EPISODES = BLACKLIST;
   }
 
-  const blacklists = episodes.filter((episode) =>
-    BLACKLISTED_EPISODES.episodes.includes(episode.eid) || !episode.isVisible
+  const blacklists = episodes.filter(
+    (episode) =>
+      BLACKLISTED_EPISODES.episodes.includes(episode.eid) || !episode.isVisible
   );
 
   if (blacklists.length === 0) {
@@ -77,7 +84,11 @@ export async function getPodcasts() {
   const decodedPermacast = JSON.parse(base64url.decode(encodedPermacast));
 
   for (let factory of decodedPermacast.res) {
-
+    // console.log("FACTORYYYYYYYYYYYYYY\n\n")
+    // console.log(factory)
+    // console.log("\n\n\n")
+    // const v2Possibility = V2_V3_ARRAY.findIndex((f) => f.old === factory.id);
+    // if(v2Possibility !== -1)
     const podcasts = factory.podcasts;
 
     if (podcasts.length === 0) {
@@ -87,8 +98,7 @@ export async function getPodcasts() {
     if (podcasts.length > 1) {
       for (let podcast of podcasts) {
         delete podcast["logs"];
-          res.push(podcast);
-
+        res.push(podcast);
       }
     } else {
       delete podcasts[0]["logs"];
@@ -119,7 +129,7 @@ export async function getEpisodes(pid) {
     return EMPTY_OBJECT;
   }
 
-  const podcastObject = await removeBlacklists(podcasts[podcastIndex])
+  const podcastObject = await removeBlacklists(podcasts[podcastIndex]);
   return base64url(JSON.stringify(podcastObject));
 }
 
@@ -165,7 +175,7 @@ export async function getTotalPermacastSize() {
     if (episodes.length === 0) {
       continue;
     }
-    const sizeArray = episodes.map((ep) => ep.contentTxByteSize); 
+    const sizeArray = episodes.map((ep) => ep.contentTxByteSize);
     const podcastSize = sizeArray.reduce((a, b) => a + b, 0);
     totalSize += podcastSize;
   }
@@ -267,7 +277,6 @@ export async function stats() {
     console.log(error);
   }
 }
-
 
 export async function polling(blocksNb) {
   try {
