@@ -6,7 +6,7 @@ export const permacastDeepGraphs = {
   transactions(
     tags: [
         { name: "App-Name", values: "SmartWeaveContract"},
-        { name: "Contract-Src", values: "bC5encUQhWn_pt06bV2tGJ_zWFz0jSdd5WSRghzAO8g"},
+        { name: "Contract-Src", values: "-SoIrUzyGEBklizLQo1w5AnS7uuOB87zUrg-kN1QWw4"},
         { name: "Permacast-Version", values: "amber"}
         ]
     first: 250
