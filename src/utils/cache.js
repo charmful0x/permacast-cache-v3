@@ -30,7 +30,6 @@ async function removeBlacklists(podObj) {
     [
       "8upJILbuOURWTDkNtTZRoqmF32J2zjsw4PGj3SNWZ40",
       "IsnhHYs1JXLBBIwFgz8ztnBvcR6dpFVkJM_YRHIXJfE",
-      "bVdFsVa1AxCWgt6i_0zMS5OxmVJmzsANF-izwCQcnh4",
     ].includes(podObj.childOf)
   ) {
     return podObj;
