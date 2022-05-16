@@ -84,11 +84,6 @@ export async function getPodcasts() {
   const decodedPermacast = JSON.parse(base64url.decode(encodedPermacast));
 
   for (let factory of decodedPermacast.res) {
-    // console.log("FACTORYYYYYYYYYYYYYY\n\n")
-    // console.log(factory)
-    // console.log("\n\n\n")
-    // const v2Possibility = V2_V3_ARRAY.findIndex((f) => f.old === factory.id);
-    // if(v2Possibility !== -1)
     const podcasts = factory.podcasts;
 
     if (podcasts.length === 0) {
@@ -98,10 +93,12 @@ export async function getPodcasts() {
     if (podcasts.length > 1) {
       for (let podcast of podcasts) {
         delete podcast["logs"];
+        podcast.superAdmins = factory.superAdmins;
         res.push(podcast);
       }
     } else {
       delete podcasts[0]["logs"];
+      podcasts[0].superAdmins = factory.superAdmins;
       res.push(podcasts[0]);
     }
   }
