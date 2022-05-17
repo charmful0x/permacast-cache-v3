@@ -26,13 +26,6 @@ function sleep(ms) {
 }
 
 async function removeBlacklists(podObj) {
-  if (
-    [
-      "8upJILbuOURWTDkNtTZRoqmF32J2zjsw4PGj3SNWZ40",
-    ].includes(podObj.childOf)
-  ) {
-    return podObj;
-  }
   const episodes = podObj["episodes"];
   //   podObj["original_episodes_array"] = episodes;
   let BLACKLISTED_EPISODES = await getStateOf(MASKING_CONTRACT);
