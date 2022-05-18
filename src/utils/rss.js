@@ -42,7 +42,7 @@ export async function generateRss(pid) {
       description: episode.description,
       enclosure: {
         url: `https://arweave.net/${episode.contentTx}`,
-        size: episode.audioTxByteSize,
+        size: episode.contentTxByteSize,
         type: episode.type,
       },
       guid: episode.eid,
